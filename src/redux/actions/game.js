@@ -2,7 +2,7 @@
 import * as constants from '../constants' ;
 import request from 'axios';
 
-const api = 'http://localhost:3001';
+const api = '/';
 
 //
 const createGame = (options = {}) => async (dispatch) => {
