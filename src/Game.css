@@ -61,3 +61,17 @@
 .game-over-message {
   color: red;
 }
+
+.form {
+  margin-bottom: 1em;
+}
+
+.form-label {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.numeric-input {
+  padding: 1em;
+  width: 20px;
+}
