@@ -2,7 +2,7 @@
 import * as constants from '../constants' ;
 import request from 'axios';
 
-const api = '/';
+const api = '/api/minesweeper';
 
 //
 const createGame = (options = {}) => async (dispatch) => {
@@ -10,7 +10,7 @@ const createGame = (options = {}) => async (dispatch) => {
     dispatch({ type: constants.GAME_LOADING, payload: true });
 
     const response = await request
-      .post(`${api}/api/minesweeper`, {
+      .post(`${api}`, {
         colsSize: options.colsSize,
         rowsSize: options.rowsSize,
         totalBombs: options.totalBombs,
@@ -33,7 +33,7 @@ const revealCell = (gameId, cell = {}) => async (dispatch) => {
     dispatch({ type: constants.GAME_UPDATING, payload: true });
 
     const response = await request
-      .post(`${api}/api/minesweeper/${gameId}/reveal-cell`, {
+      .post(`${api}/${gameId}/reveal-cell`, {
         ...cell,
       });
     const { data } = response;
