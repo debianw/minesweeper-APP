@@ -1,5 +1,5 @@
 //
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Grid from './Grid';
 import * as gameActions from './redux/actions/game';
@@ -18,15 +18,20 @@ class Game extends Component {
   }
 
   render() {
-    const { game } = this.props;
+    const { game, revealCell } = this.props;
 
     return (
       <div className="container">
         <h1> MineSweeper </h1>
+        {game.gameOver && <h3 className="game-over-message"> GAME OVER </h3>}
         <div className="game-wrapper">
           {game.loading && (<div>Loading ...</div>)}
           {!game.loading && (
-            <Grid data={game.grid} revealAll={game.revealAll} />
+            <Fragment>
+              {game.updating && <div className="mask">Revealing cell ...</div>}
+              {game.gameOver && <div className="mask"></div>}
+              <Grid gameId={game._id} data={game.grid} revealAll={game.revealAll} onRevealCell={revealCell} />
+            </Fragment>
           )}
         </div>
       </div>
@@ -44,5 +49,6 @@ export default connect(
   mapStateToProps,
   {
     createGame: gameActions.createGame,
+    revealCell: gameActions.revealCell,
   }
 )(Game);
